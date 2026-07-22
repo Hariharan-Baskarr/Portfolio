@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hariharan Baskar — Pipeline Operations Engineer</title>
+<meta name="description" content="Hariharan Baskar — Pipeline Operations Engineer with 3+ years in SCADA, PLC, and multi-product pipeline operations. Open to mechanical engineering roles.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230c1218'/%3E%3Ccircle cx='12' cy='12' r='6' fill='none' stroke='%23f2a93b' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23f2a93b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --steel-900:#0c1218;
+    --steel-800:#131b23;
+    --steel-700:#1c2731;
+    --steel-600:#2a3742;
+    --line:#39474f;
+    --paper:#e9e6dd;
+    --paper-dim:#a9b0b3;
+    --amber:#f2a93b;
+    --amber-dim:#a97a2c;
+    --green:#5fd98a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--steel-900);
+    color:var(--paper);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    letter-spacing:0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+
+  /* faint blueprint grid */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.08;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 28px;
+    background:rgba(12,18,24,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+  }
+  .topbar .tag{color:var(--amber); font-weight:600;}
+  .status-dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:var(--green); margin-right:6px;
+    box-shadow:0 0 6px var(--green);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  .topbar-right{display:flex; gap:22px;}
+  .topbar-right a:not(:last-child){border-right:1px solid var(--line); padding-right:22px;}
+  .topbar-right a{
+    color:var(--paper-dim);
+    text-decoration:none;
+    transition:color .2s;
+  }
+  .topbar-right a:hover{color:var(--amber);}
+  @media (max-width:700px){
+    .topbar-right{display:none;}
+  }
+
+  /* scroll reveal */
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* card hover polish */
+  .report, .edu-card{
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .report:hover, .edu-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--amber-dim);
+    box-shadow:0 14px 28px rgba(0,0,0,0.35);
+  }
+  .tag-chip{transition:border-color .2s ease, color .2s ease, transform .2s ease;}
+  .tag-chip:hover{
+    border-color:var(--amber-dim);
+    color:var(--paper);
+    transform:translateY(-2px);
+  }
+  .contact-list a{transition:color .2s ease, transform .2s ease;}
+  .contact-list a:hover{color:var(--amber); transform:translateX(3px);}
+  .station h3{transition:color .2s ease;}
+  .station:hover h3{color:var(--amber);}
+
+  section{position:relative; z-index:1; padding:90px 8vw;}
+  @media (max-width:700px){section{padding:64px 6vw;}}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-top:70px;
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:40px;
+    align-items:center;
+    min-height:88vh;
+  }
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr; min-height:auto;}
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--amber);
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:"◆"; font-size:10px;}
+  .hero h1{
+    font-size:clamp(2.4rem, 5.2vw, 4.4rem);
+    font-weight:700;
+    line-height:1.02;
+    color:var(--paper);
+  }
+  .hero .role{
+    margin-top:18px;
+    font-size:clamp(1.05rem, 1.6vw, 1.35rem);
+    color:var(--paper-dim);
+    max-width:620px;
+    font-weight:400;
+  }
+  .hero .role b{color:var(--amber); font-weight:600;}
+  .hero-cta{
+    margin-top:34px;
+    display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.05em;
+    padding:13px 22px;
+    border:1px solid var(--amber);
+    color:var(--amber);
+    text-decoration:none;
+    text-transform:uppercase;
+    transition:background .2s, color .2s;
+  }
+  .btn.solid{background:var(--amber); color:var(--steel-900);}
+  .btn:hover{background:var(--amber); color:var(--steel-900);}
+
+  /* HMI readout panel */
+  .panel{
+    background:var(--steel-800);
+    border:1px solid var(--line);
+    padding:26px;
+    position:relative;
+  }
+  .panel::before{
+    content:"HMI // OPERATIONS SUMMARY";
+    position:absolute; top:-11px; left:20px;
+    background:var(--steel-800);
+    padding:0 10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.1em;
+    color:var(--paper-dim);
+  }
+  .readout-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:8px;
+  }
+  .readout{
+    border-left:2px solid var(--amber-dim);
+    padding-left:14px;
+  }
+  .readout .val{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.9rem;
+    color:var(--amber);
+    font-weight:600;
+    line-height:1;
+  }
+  .readout .lbl{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--paper-dim);
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    margin-top:6px;
+  }
+  .flowline{
+    grid-column:1/-1;
+    margin-top:10px;
+    height:34px;
+  }
+
+  /* ---------- section headers ---------- */
+  .sec-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:44px;
+  }
+  .sec-num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--amber-dim);
+    font-size:13px;
+  }
+  .sec-head h2{
+    font-size:clamp(1.5rem,2.6vw,2.1rem);
+    color:var(--paper);
+  }
+  .sec-head .rule{
+    flex:1; height:1px; background:var(--line);
+  }
+
+  /* ---------- pipeline route (experience) ---------- */
+  .pipeline{
+    position:relative;
+    padding-left:34px;
+  }
+  .pipeline::before{
+    content:"";
+    position:absolute; left:9px; top:6px; bottom:6px;
+    width:2px;
+    background:repeating-linear-gradient(var(--amber-dim), var(--amber-dim) 8px, transparent 8px, transparent 14px);
+  }
+  .station{
+    position:relative;
+    padding-bottom:52px;
+  }
+  .station:last-child{padding-bottom:0;}
+  .station::before{
+    content:"";
+    position:absolute; left:-34px; top:4px;
+    width:18px; height:18px;
+    border-radius:50%;
+    background:var(--steel-900);
+    border:2px solid var(--amber);
+  }
+  .station.current::before{
+    background:var(--amber);
+    box-shadow:0 0 0 4px rgba(242,169,59,0.18);
+  }
+  .station .when{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--amber);
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .station h3{
+    font-size:1.25rem;
+    margin-top:6px;
+    color:var(--paper);
+  }
+  .station .org{
+    color:var(--paper-dim);
+    font-size:0.95rem;
+    margin-top:2px;
+  }
+  .station ul{
+    margin:16px 0 0 0;
+    list-style:none;
+    display:grid;
+    gap:9px;
+  }
+  .station li{
+    font-size:0.94rem;
+    color:#c7cbcd;
+    padding-left:18px;
+    position:relative;
+  }
+  .station li::before{
+    content:"›";
+    position:absolute; left:0; color:var(--amber-dim);
+  }
+
+  /* ---------- competencies as tag rack ---------- */
+  .tag-rack{
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .tag-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    padding:9px 14px;
+    border:1px solid var(--line);
+    background:var(--steel-800);
+    color:var(--paper-dim);
+    letter-spacing:0.02em;
+  }
+  .tag-chip b{color:var(--amber); font-weight:500;}
+
+  .comp-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:36px;
+    margin-top:36px;
+  }
+  @media (max-width:800px){.comp-cols{grid-template-columns:1fr;}}
+  .comp-cols h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:14px;
+  }
+
+  /* ---------- projects ---------- */
+  .reports{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  @media (max-width:900px){.reports{grid-template-columns:1fr;}}
+  .report{
+    background:var(--steel-800);
+    border:1px solid var(--line);
+    padding:24px;
+    border-top:3px solid var(--amber-dim);
+  }
+  .report .rno{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--amber);
+    letter-spacing:0.1em;
+  }
+  .report h3{
+    font-size:1.05rem;
+    margin-top:12px;
+    color:var(--paper);
+    line-height:1.3;
+  }
+  .report p{
+    margin-top:12px;
+    font-size:0.9rem;
+    color:var(--paper-dim);
+  }
+
+  /* ---------- education ---------- */
+  .edu-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  @media (max-width:800px){.edu-row{grid-template-columns:1fr;}}
+  .edu-card{
+    border:1px solid var(--line);
+    padding:20px;
+    position:relative;
+  }
+  .edu-card .score{
+    position:absolute; top:20px; right:20px;
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--green);
+    font-size:12px;
+  }
+  .edu-card .deg{font-weight:600; color:var(--paper);}
+  .edu-card .inst{color:var(--paper-dim); font-size:0.9rem; margin-top:4px;}
+  .edu-card .yr{
+    margin-top:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--amber-dim);
+  }
+
+  /* ---------- languages/training strip ---------- */
+  .strip{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:14px;
+  }
+
+  /* ---------- footer / contact ---------- */
+  footer{
+    padding:70px 8vw 40px;
+    border-top:1px solid var(--line);
+    position:relative; z-index:1;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:40px;
+  }
+  @media (max-width:800px){.contact-grid{grid-template-columns:1fr;}}
+  footer h2{font-size:1.8rem;}
+  .contact-list{margin-top:24px; display:grid; gap:14px;}
+  .contact-list a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.95rem;
+    color:var(--paper);
+    text-decoration:none;
+    display:flex; gap:12px; align-items:center;
+  }
+  .contact-list a b{color:var(--amber); font-weight:500; min-width:70px; display:inline-block;}
+  .foot-note{
+    margin-top:50px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--paper-dim);
+    letter-spacing:0.04em;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div><span class="status-dot"></span><span class="tag">OPEN TO WORK</span> — HARIHARAN BASKAR</div>
+  <div class="topbar-right">
+    <a href="#experience">Experience</a>
+    <a href="#competencies">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<section class="hero" id="top">
+  <div>
+    <div class="eyebrow">HPCL · VDPL Multi-Product Pipeline</div>
+    <h1>Hariharan Baskar</h1>
+    <p class="role">Pipeline Operations Engineer keeping a live multi-product petroleum line running <b>safely</b>, <b>on schedule</b>, and <b>under control</b> — across SCADA, PLC, pigging, and cathodic protection. Open to opportunities across <b>mechanical engineering</b> more broadly, with a strong drive to learn.</p>
+    <div class="hero-cta">
+      <a class="btn solid" href="#experience">View Operations Log</a>
+      <a class="btn" href="Hariharan_Baskar_Resume.pdf" target="_blank">Download Resume</a>
+      <a class="btn" href="mailto:haaruthhari@gmail.com">Contact</a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="readout-grid">
+      <div class="readout">
+        <div class="val">3+</div>
+        <div class="lbl">Years / Live Pipeline</div>
+      </div>
+      <div class="readout">
+        <div class="val">24×7</div>
+        <div class="lbl">Shift Control Room</div>
+      </div>
+      <div class="readout">
+        <div class="val">SCADA</div>
+        <div class="lbl">+ PLC Monitoring</div>
+      </div>
+      <div class="readout">
+        <div class="val">M.Tech</div>
+        <div class="lbl">Energy Technology</div>
+      </div>
+      <div class="flowline">
+        <svg width="100%" height="34" viewBox="0 0 400 34" preserveAspectRatio="none">
+          <line x1="0" y1="17" x2="400" y2="17" stroke="#2a3742" stroke-width="6"/>
+          <line id="flow" x1="0" y1="17" x2="400" y2="17" stroke="#f2a93b" stroke-width="2" stroke-dasharray="10 14"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="reveal">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2>Operations Log</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="pipeline">
+    <div class="station current">
+      <div class="when">February 2025 — Present</div>
+      <h3>Engineer (Contract), Deputed to HPCL — VDPL Pipeline</h3>
+      <div class="org">SINCLUS Engineering (Mar 2026 — Present) · Aarvi Encon Limited (Feb 2025 — Feb 2026) · Dharmapuri, Tamil Nadu</div>
+      <ul>
+        <li>Monitor oil movement, pumping, storage, and pipeline integrity in real time via SCADA and PLC-based control systems.</li>
+        <li>Run control room operations — alarm handling, abnormal condition response, shift-to-shift coordination — in a 24×7 environment.</li>
+        <li>Execute pigging operations: launching, receiving, line preparation, and continuous monitoring for flow assurance.</li>
+        <li>Maintain pumps, valves, pig barrels, basket filters, and SV stations to reduce unplanned downtime.</li>
+        <li>Monitor cathodic protection systems to prevent corrosion on underground pipeline assets.</li>
+        <li>Carry out fire hydrant checks, piping work, and mechanical installations to safety standard.</li>
+        <li>Prepare maintenance schedules, inspection reports, and documentation for audit readiness.</li>
+        <li>Conduct toolbox talks, issue work permits, and lead mock drills for internal safety audits.</li>
+        <li>Coordinate with upstream and downstream stations for safe startup/shutdown sequences.</li>
+        <li>Perform Right of Use (ROU) inspections to flag encroachment risk.</li>
+      </ul>
+    </div>
+
+    <div class="station">
+      <div class="when">July 2023 — January 2025</div>
+      <h3>Supervisor</h3>
+      <div class="org">TNRTP Marutham Farmer Producer Company Limited · Coimbatore, Tamil Nadu</div>
+      <ul>
+        <li>Supervised daily operations and coordinated staff activity ahead of transitioning into pipeline operations.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="competencies" class="reveal">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2>System Competencies</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="comp-cols">
+    <div>
+      <h4>Core Operations</h4>
+      <div class="tag-rack">
+        <span class="tag-chip"><b>SCADA</b> Systems</span>
+        <span class="tag-chip"><b>PLC</b> Operations</span>
+        <span class="tag-chip">Control Room Ops</span>
+        <span class="tag-chip">Multi-Product Pipeline Handling</span>
+        <span class="tag-chip">Pumping &amp; Storage</span>
+        <span class="tag-chip">PIDS</span>
+        <span class="tag-chip">Leak Detection</span>
+        <span class="tag-chip">Pigging Operations</span>
+        <span class="tag-chip">Cathodic Protection</span>
+      </div>
+    </div>
+    <div>
+      <h4>Maintenance &amp; Safety</h4>
+      <div class="tag-rack">
+        <span class="tag-chip">Preventive &amp; Breakdown Maintenance</span>
+        <span class="tag-chip">Emergency Response</span>
+        <span class="tag-chip">Process Safety</span>
+        <span class="tag-chip">Work Permit Systems (PTW)</span>
+        <span class="tag-chip">HIRA Awareness</span>
+        <span class="tag-chip">Inspection &amp; Reporting</span>
+        <span class="tag-chip">Toolbox Talks</span>
+        <span class="tag-chip">Mock Drill Facilitation</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:36px;">
+    <h4 style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--paper-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;">Technical Tools</h4>
+    <div class="tag-rack">
+      <span class="tag-chip">SCADA (Operations)</span>
+      <span class="tag-chip">PLC (Operational Level)</span>
+      <span class="tag-chip">AutoCAD</span>
+      <span class="tag-chip">Creo</span>
+      <span class="tag-chip">ANSYS</span>
+      <span class="tag-chip">MS Office</span>
+      <span class="tag-chip">STS</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="reveal">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2>Project Reports</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="reports">
+    <div class="report">
+      <div class="rno">M.TECH PROJECT</div>
+      <h3>Floating Photovoltaic Thermal (FPVT) System Performance</h3>
+      <p>Experimental evaluation and numerical analysis of an FPVT system's performance.</p>
+    </div>
+    <div class="report">
+      <div class="rno">B.E. PROJECT</div>
+      <h3>Solar-Powered Peltier-Based Fully Automatic Egg Incubator</h3>
+      <p>Automatic incubator design combining solar power with Peltier-based thermal control.</p>
+    </div>
+    <div class="report">
+      <div class="rno">DIPLOMA PROJECT</div>
+      <h3>Two-Stroke Petrol Engine with Double Spark</h3>
+      <p>Fabrication of a modified two-stroke petrol engine fitted with a double-spark setup.</p>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="reveal">
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2>Certification Stations</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="edu-row">
+    <div class="edu-card">
+      <div class="score">76%</div>
+      <div class="deg">M.Tech, Energy Technology</div>
+      <div class="inst">Periyar University</div>
+      <div class="yr">2022 — 2024</div>
+    </div>
+    <div class="edu-card">
+      <div class="score">CGPA 8.2</div>
+      <div class="deg">B.E, Mechanical Engineering</div>
+      <div class="inst">Government College of Engineering, Dharmapuri</div>
+      <div class="yr">2019 — 2022</div>
+    </div>
+    <div class="edu-card">
+      <div class="score">90.25%</div>
+      <div class="deg">Diploma, Mechanical Engineering</div>
+      <div class="inst">Muthayammal Polytechnic College</div>
+      <div class="yr">2016 — 2019</div>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <h4 style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--paper-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;">Languages</h4>
+    <div class="strip">
+      <span class="tag-chip">Tamil — Native</span>
+      <span class="tag-chip">English — Read / Write / Speak</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact" class="reveal">
+  <div class="contact-grid">
+    <div>
+      <span class="eyebrow">End of Line</span>
+      <h2>Let's talk pipeline operations.</h2>
+      <p style="color:var(--paper-dim); margin-top:14px; max-width:480px;">Open to roles across mechanical engineering — control room, field operations, maintenance, design, or manufacturing — not limited to pipeline. Quick learner, ready to grow into new systems and industries.</p>
+    </div>
+    <div class="contact-list">
+      <a href="mailto:haaruthhari@gmail.com"><b><svg width="16" height="16" viewBox="0 0 48 36" style="vertical-align:-3px; margin-right:2px;"><path fill="#4285F4" d="M45.818 4.5H2.182C.977 4.5 0 5.477 0 6.682v22.636C0 30.523.977 31.5 2.182 31.5h4.363V13.59L24 26.318 41.455 13.59V31.5h4.363c1.205 0 2.182-.977 2.182-2.182V6.682c0-1.205-.977-2.182-2.182-2.182z"/><path fill="#EA4335" d="M2.182 4.5L24 20.318 45.818 4.5H2.182z"/><path fill="#34A853" d="M2.182 31.5H6.545V13.59L2.182 10.34V31.5z"/><path fill="#FBBC04" d="M41.455 31.5h4.363V10.34l-4.363 3.25V31.5z"/><path fill="#C5221F" d="M2.182 4.5c-1.205 0-2.182.977-2.182 2.182v3.659L6.545 13.59V4.5H2.182z"/></svg></b> haaruthhari@gmail.com</a>
+      <a href="mailto:hariharan.baskarr@outlook.com"><b><svg width="15" height="15" viewBox="0 0 24 24" style="vertical-align:-3px; margin-right:2px;"><path fill="#0A2767" d="M23.5 6.2v11.6c0 .7-.6 1.3-1.3 1.3h-6.4V9.1L23.5 6.2z"/><path fill="#0364B8" d="M15.8 4.9v14.2H8.9l-.2-.1V9.6l.2-.1 6.9-4.6z"/><path fill="#28A8EA" d="M23.5 6.2l-7.7 4.9-7.7-4.9L15.8 3l7.7 3.2z"/><rect width="9.6" height="9.6" x="0.5" y="7.2" fill="#14447D" rx="1"/><path fill="#0F2A5E" d="M5.3 9.9c1.9 0 3.4 1.6 3.4 3.6s-1.5 3.6-3.4 3.6-3.4-1.6-3.4-3.6 1.5-3.6 3.4-3.6zm0 1.5c-1 0-1.7.9-1.7 2.1s.7 2.1 1.7 2.1 1.7-.9 1.7-2.1-.7-2.1-1.7-2.1z"/></svg></b> hariharan.baskarr@outlook.com</a>
+      <a href="tel:+919952756619"><b><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px; margin-right:2px;"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.36 11.36 0 003.57.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.57 1 1 0 01-.25 1.02l-2.2 2.2z"/></svg></b> +91 99527 56619</a>
+      <a href="https://www.linkedin.com/in/hariharan-b-6b710b1a1" target="_blank" rel="noopener"><b><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px; margin-right:2px;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></b> LinkedIn</a>
+      <a href="#top"><b><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px; margin-right:2px;"><path d="M12 2C7.86 2 4.5 5.36 4.5 9.5c0 5.25 6.11 11.34 6.37 11.6a1.6 1.6 0 002.26 0c.26-.26 6.37-6.35 6.37-11.6C19.5 5.36 16.14 2 12 2zm0 10.25a2.75 2.75 0 110-5.5 2.75 2.75 0 010 5.5z"/></svg></b> Dharmapuri, Tamil Nadu, India</a>
+    </div>
+  </div>
+  <div class="foot-note">HARIHARAN BASKAR — PIPELINE OPERATIONS ENGINEER // LOG CLOSED</div>
+</footer>
+
+<script>
+  // animated flow along the HMI readout line
+  const flow = document.getElementById('flow');
+  let offset = 0;
+  function animateFlow(){
+    offset -= 1;
+    flow.setAttribute('stroke-dashoffset', offset);
+    requestAnimationFrame(animateFlow);
+  }
+  animateFlow();
+
+  // respect reduced motion
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    cancelAnimationFrame(animateFlow);
+  }
+
+  // scroll reveal for sections
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
